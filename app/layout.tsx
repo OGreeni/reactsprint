@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-page-custom-font */
-import "@styles/global.css";
+import '@styles/global.css';
 
 export default function RootLayout({
   children,
@@ -15,7 +15,9 @@ export default function RootLayout({
         rel="stylesheet"
       />
       <head />
-      <body>{children}</body>
+      <body className="bg-gradient-to-r from-[#8EC5FC] to-[#E0C3FC]">
+        {children}
+      </body>
     </html>
   );
 }
