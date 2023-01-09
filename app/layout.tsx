@@ -1,4 +1,7 @@
 /* eslint-disable @next/next/no-page-custom-font */
+import Footer from '@components/footer';
+import Navigation from '@components/navigation';
+
 import '@styles/global.css';
 
 export default function RootLayout({
@@ -15,8 +18,12 @@ export default function RootLayout({
         rel="stylesheet"
       />
       <head />
-      <body className="bg-gradient-to-r from-[#8EC5FC] to-[#E0C3FC]">
-        {children}
+      <body className="max-w-8xl mx-auto flex h-screen flex-col bg-gradient-to-r from-[#8EC5FC] to-[#E0C3FC] px-5">
+        <header className="mb-32">
+          <Navigation />
+        </header>
+        <main className="grid grow">{children}</main>
+        <Footer />
       </body>
     </html>
   );
