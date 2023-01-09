@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import { ClerkProvider } from '@clerk/nextjs/app-beta';
+import AnalyticsWrapper from '@components/analytics-wrapper';
 import Footer from '@components/footer';
 import Navigation from '@components/navigation';
 
@@ -26,6 +27,7 @@ export default function RootLayout({
           </header>
           <main className="grid grow">{children}</main>
           <Footer />
+          <AnalyticsWrapper />
         </body>
       </html>
     </ClerkProvider>

@@ -25,14 +25,14 @@ export default function Navigation() {
         <StyledLink href="/">ReactSprint</StyledLink>
       </div>
       <div className="hidden items-center gap-5 text-2xl lg:flex">
+        <StyledLink href="/about">About</StyledLink>
+        <StyledLink href="/challenge-board">Challenge Board</StyledLink>
+        <StyledLink href="/contribute">Contribute</StyledLink>
         <SignedOut>
           <StyledAnchor>
             <LoginButton />
           </StyledAnchor>
         </SignedOut>
-        <StyledLink href="/about">About</StyledLink>
-        <StyledLink href="/challenge-board">Challenge Board</StyledLink>
-        <StyledLink href="/contribute">Contribute</StyledLink>
         <div className="rounded-full shadow-md">
           <UserButton />
         </div>
@@ -47,14 +47,14 @@ export default function Navigation() {
           !isOpen && 'pointer-events-none opacity-0'
         } fixed left-0 top-0 flex h-screen w-screen flex-col items-center justify-center gap-32 bg-white/90 transition-opacity`}
       >
+        <StyledLink href="/about">About</StyledLink>
+        <StyledLink href="/challenge-board">Challenge Board</StyledLink>
+        <StyledLink href="/contribute">Contribute</StyledLink>{' '}
         <SignedOut>
           <StyledAnchor>
             <LoginButton />
           </StyledAnchor>
         </SignedOut>
-        <StyledLink href="/about">About</StyledLink>
-        <StyledLink href="/challenge-board">Challenge Board</StyledLink>
-        <StyledLink href="/contribute">Contribute</StyledLink>
       </div>
     </nav>
   );
