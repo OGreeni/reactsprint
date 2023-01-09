@@ -7,16 +7,16 @@ import animationData from '@json/92672-animated-shapes.json';
 
 export default function Home() {
   return (
-    <section className="flex h-full items-center justify-center gap-5">
+    <section className="flex h-full flex-col items-center justify-center gap-5 lg:flex-row">
       <div>
-        <p className="text-xl font-bold text-purple-900">
+        <p className="text-lg font-bold text-purple-900 lg:text-xl">
           Hey there 👋 , welcome to
         </p>
-        <h1 className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-center text-9xl font-black text-transparent">
+        <h1 className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-center text-7xl font-black text-transparent lg:text-9xl">
           ReactSprint
         </h1>
-        <p className="text-center text-2xl font-bold text-purple-900">
-          Level up your React.js knowledge with free challenges.
+        <p className="text-center text-xl font-bold text-purple-900 lg:text-2xl">
+          Level up your React.js skills with free challenges.
         </p>
         <Link href="/challenge-board">
           <StyledButton className="mx-auto mt-10 text-xl">
@@ -28,7 +28,7 @@ export default function Home() {
         loop
         animationData={animationData}
         play
-        className="w-[550px]"
+        className=" max-w-[550px]"
       />
     </section>
   );
