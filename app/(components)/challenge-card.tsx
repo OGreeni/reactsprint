@@ -25,7 +25,7 @@ export default function ChallengeCard({
 
   return (
     <Link href={`/challenge-board/${slug}`}>
-      <div className="flex flex-col gap-3 rounded-md bg-white/10 p-2 shadow-sm transition-all hover:rounded-xl hover:text-purple-900 hover:shadow-md">
+      <div className="flex flex-col gap-3 rounded-md bg-white/10 p-2 shadow-sm transition-all hover:scale-110 hover:rounded-xl hover:text-purple-900 hover:shadow-md">
         <h3 className="text-2xl font-bold text-purple-900">
           {titleCase(title)}
         </h3>

@@ -1,3 +1,5 @@
+// TODO FIX COMMITLINT NOT WORKING
+
 {
   "hooks": {
     "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
