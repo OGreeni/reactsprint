@@ -1,10 +1,10 @@
 import React from 'react';
 
-import StyledLink from '@components/styled/styled-link';
+import StyledLink from '@app/(components)/(styled)/styled-link';
 
 export default function Footer() {
   return (
-    <footer className="text-center text-lg text-purple-900">
+    <footer className="p-2 text-center text-lg font-bold">
       Made with ❤ by <StyledLink href="/">OGreeni</StyledLink> on{' '}
       <StyledLink href="/">GitHub</StyledLink>
     </footer>
