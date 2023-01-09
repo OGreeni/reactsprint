@@ -1,13 +1,17 @@
 'use client';
 import React, { useState } from 'react';
 
-export default function Hamburger() {
-  const [isOpen, setIsOpen] = useState(false);
+interface Props {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function Hamburger({ isOpen, setIsOpen }: Props) {
   const genericHamburgerLine = `h-1 w-6 my-1 rounded-full bg-purple-900 transition ease transform duration-300`;
 
   return (
     <button
-      className="group flex h-12 w-12 flex-col items-center justify-center rounded border-2 border-purple-900"
+      className="group z-10 flex h-12 w-12 flex-col items-center justify-center rounded border-2 border-purple-900"
       onClick={() => setIsOpen(!isOpen)}
     >
       <div

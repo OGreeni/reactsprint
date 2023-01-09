@@ -3,6 +3,7 @@
 
 echo '🧑 Styling, testing, and building your application before committing... 🧑'
 
+
 # check tsconfig standards
 npm run check-types ||
 (

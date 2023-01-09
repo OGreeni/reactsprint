@@ -8,6 +8,9 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    gridTemplateColumns: {
+      'fill-96': 'repeat(auto-fill, 24rem)',
+    },
     extend: {
       fontFamily: {
         sans: ['Nunito', ...defaultTheme.fontFamily.sans],
