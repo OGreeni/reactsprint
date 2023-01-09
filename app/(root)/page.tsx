@@ -12,7 +12,7 @@ export default function Home() {
         <p className="text-lg font-bold text-purple-900 lg:text-xl">
           Hey there 👋 , welcome to
         </p>
-        <h1 className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-center text-7xl font-black text-transparent lg:text-9xl">
+        <h1 className="animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-center text-6xl font-black text-transparent lg:text-9xl">
           ReactSprint
         </h1>
         <p className="text-center text-xl font-bold text-purple-900 lg:text-2xl">

@@ -20,9 +20,11 @@ export default function Navigation() {
           loop
           animationData={animationData}
           play
-          className="w-20"
+          className="w-14 lg:w-20"
         />
-        <StyledLink href="/">ReactSprint</StyledLink>
+        <StyledLink href="/" className="text-xl lg:text-3xl">
+          ReactSprint
+        </StyledLink>
       </div>
       <div className="hidden items-center gap-5 text-2xl lg:flex">
         <StyledLink href="/about">About</StyledLink>

@@ -6,22 +6,7 @@ import ChallengeCard from '@components/challenge-card';
 import Sidebar from './sidebar';
 
 export default function Page() {
-  // null --> initial state (nothing selected, everything shown)
-  const [filters, setFilters] = useState<{
-    categories: {
-      useState: boolean;
-      customHooks: boolean;
-      useEffect: boolean;
-      useRef: boolean;
-      forms: boolean;
-      eventHandling: boolean;
-    };
-    difficulty: {
-      easy: boolean;
-      medium: boolean;
-      hard: boolean;
-    };
-  } | null>(null);
+  // TODO: filters functionality
 
   return (
     <section>
