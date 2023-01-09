@@ -1,7 +1,7 @@
 import React from 'react';
 
+import RedirectToSignInWrapper from '@app/(components)/(auth)/redirect-to-sign-in-wrapper';
 import { StyledAnchor } from '@app/(components)/(styled)';
-import RedirectToSignInWrapper from '@app/(components)/redirect-to-sign-in-wrapper';
 import { SignedIn, SignedOut } from '@clerk/nextjs/app-beta';
 
 import ContributeForm from './contribute-form';

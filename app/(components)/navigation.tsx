@@ -2,9 +2,13 @@
 import React, { useState } from 'react';
 
 import StyledLink from '@app/(components)/(styled)/styled-link';
+import { UserButton } from '@clerk/nextjs/app-beta';
+import { SignedOut } from '@clerk/nextjs/app-beta/client';
 import LottieWrapper from '@components/lottie-wrapper';
 import animationData from '@json/92672-animated-shapes.json';
 
+import LoginButton from './(auth)/login-button';
+import { StyledAnchor } from './(styled)';
 import Hamburger from './hamburger';
 
 export default function Navigation() {
@@ -21,11 +25,20 @@ export default function Navigation() {
         <StyledLink href="/">ReactSprint</StyledLink>
       </div>
       <div className="hidden items-center gap-5 text-2xl lg:flex">
+        <SignedOut>
+          <StyledAnchor>
+            <LoginButton />
+          </StyledAnchor>
+        </SignedOut>
         <StyledLink href="/about">About</StyledLink>
         <StyledLink href="/challenge-board">Challenge Board</StyledLink>
         <StyledLink href="/contribute">Contribute</StyledLink>
+        <div className="rounded-full shadow-md">
+          <UserButton />
+        </div>
       </div>
-      <div className="flex items-center justify-center lg:hidden">
+      <div className="flex items-center justify-center gap-4 lg:hidden">
+        <UserButton />
         <Hamburger isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
 
@@ -34,6 +47,11 @@ export default function Navigation() {
           !isOpen && 'pointer-events-none opacity-0'
         } fixed left-0 top-0 flex h-screen w-screen flex-col items-center justify-center gap-32 bg-white/90 transition-opacity`}
       >
+        <SignedOut>
+          <StyledAnchor>
+            <LoginButton />
+          </StyledAnchor>
+        </SignedOut>
         <StyledLink href="/about">About</StyledLink>
         <StyledLink href="/challenge-board">Challenge Board</StyledLink>
         <StyledLink href="/contribute">Contribute</StyledLink>
