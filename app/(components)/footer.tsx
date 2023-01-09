@@ -1,18 +1,26 @@
 import React from 'react';
 
-import StyledLink from '@app/(components)/(styled)/styled-link';
+import { StyledAnchor } from './(styled)';
 
 export default function Footer() {
   return (
     <footer className="p-2 text-center text-lg text-purple-500">
       Made with ♡ by{' '}
-      <StyledLink href="/" className="text-purple-900">
+      <StyledAnchor
+        href="https://github.com/ogreeni"
+        className="text-purple-900"
+        target="_blank"
+      >
         OGreeni
-      </StyledLink>{' '}
+      </StyledAnchor>{' '}
       on{' '}
-      <StyledLink href="/" className="text-purple-900">
+      <StyledAnchor
+        href="https://github.com/ogreeni/reactsprint"
+        className="text-purple-900"
+        target="_blank"
+      >
         GitHub
-      </StyledLink>
+      </StyledAnchor>
     </footer>
   );
 }

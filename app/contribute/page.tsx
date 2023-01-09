@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { StyledAnchor } from '@app/(components)/(styled)';
+
 import ContributeForm from './contribute-form';
 
 export default function Page() {
@@ -13,6 +15,16 @@ export default function Page() {
         details below:
       </p>
       <ContributeForm />
+      <p className="text-center text-lg">
+        Alternatively, open an issue in our{' '}
+        <StyledAnchor
+          href="https://github.com/ogreeni/reactsprint"
+          className="font-bold"
+          target="_blank"
+        >
+          GitHub repo
+        </StyledAnchor>
+      </p>
     </section>
   );
 }
