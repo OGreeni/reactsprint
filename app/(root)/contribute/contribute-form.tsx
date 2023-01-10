@@ -22,10 +22,10 @@ const formSchema = z.object({
   ]),
 });
 
-export type FormSchema = z.infer<typeof formSchema>;
+export type ChallengeDetails = z.infer<typeof formSchema>;
 
 export default function ContributeForm() {
-  const [formFields, setFormFields] = useState<FormSchema>({
+  const [formFields, setFormFields] = useState<ChallengeDetails>({
     title: '',
     description: '',
     javascript: { starter: '', solution: '' },

@@ -3,6 +3,7 @@ import { ClerkProvider } from '@clerk/nextjs/app-beta';
 import AnalyticsWrapper from '@components/analytics-wrapper';
 import Footer from '@components/footer';
 import Navigation from '@components/navigation';
+import ReactQueryWrapper from '@components/react-query-wrapper';
 import { Nunito } from '@next/font/google';
 
 const nunito = Nunito({
@@ -23,7 +24,9 @@ export default function RootLayout({
           <header className="mb-32">
             <Navigation />
           </header>
-          <main className="grid grow">{children}</main>
+          <main className="grid grow">
+            <ReactQueryWrapper>{children}</ReactQueryWrapper>
+          </main>
           <Footer />
           <AnalyticsWrapper />
         </body>

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import RedirectToSignInWrapper from './redirect-to-sign-in-wrapper';
 
-// TODO: refactor (current workaround)
+// TODO: refactor
 
 export default function LoginButton() {
   const [active, setActive] = useState(false);
