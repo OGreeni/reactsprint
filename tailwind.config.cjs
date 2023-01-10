@@ -13,7 +13,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--font-nunito)', ...defaultTheme.fontFamily.sans],
       },
       animation: {
         text: 'text 5s ease infinite',

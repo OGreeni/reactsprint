@@ -1,13 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { titleCase } from '../../utils';
+import DifficultyTag from '@components/difficulty-tag';
+
+import { titleCase } from '../utils';
 
 interface Props {
   title: string;
   slug: string;
   description: string;
   difficulty: 'easy' | 'medium' | 'hard';
+  challengeNumber: number;
 }
 
 export default function ChallengeCard({
@@ -16,13 +19,6 @@ export default function ChallengeCard({
   description,
   difficulty,
 }: Props) {
-  const difficultyColor =
-    difficulty === 'easy'
-      ? 'text-green-500'
-      : difficulty === 'hard'
-      ? 'text-orange-500'
-      : 'text-red-500';
-
   return (
     <Link href={`/challenge-board/${slug}`}>
       <div className="flex flex-col gap-3 rounded-md bg-white/10 p-2 shadow-sm transition-all hover:scale-110 hover:rounded-xl hover:text-purple-900 hover:shadow-md">
@@ -35,9 +31,7 @@ export default function ChallengeCard({
         </p>
         <p>
           <span className={'font-bold'}>Difficulty: </span>{' '}
-          <span className={`${difficultyColor} font-bold`}>
-            {difficulty.toUpperCase()}
-          </span>
+          <DifficultyTag difficulty="easy" />
         </p>
       </div>
     </Link>

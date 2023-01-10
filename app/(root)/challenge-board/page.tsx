@@ -19,26 +19,24 @@ export default function Page() {
             description="lorem lorem lorem lorem orem iermie mroim foiamfiomwoi maio moimiom"
             difficulty="easy"
             slug="test"
-          />{' '}
-          <ChallengeCard
-            title="test challenge"
-            description="lorem lorem lorem lorem orem iermie mroim foiamfiomwoi maio moimiom"
-            difficulty="easy"
-            slug="test"
+            challengeNumber={1}
           />
           <ChallengeCard
             title="test challenge"
             description="lorem lorem lorem lorem orem iermie mroim foiamfiomwoi maio moimiom"
             difficulty="easy"
             slug="test"
+            challengeNumber={1}
           />
           <ChallengeCard
+            challengeNumber={1}
             title="test challenge"
             description="lorem lorem lorem lorem orem iermie mroim foiamfiomwoi maio moimiom"
             difficulty="easy"
             slug="test"
           />
           <ChallengeCard
+            challengeNumber={1}
             title="test challenge"
             description="lorem lorem lorem lorem orem iermie mroim foiamfiomwoi maio moimiom"
             difficulty="easy"

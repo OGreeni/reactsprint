@@ -2,20 +2,18 @@
 import React, { useState } from 'react';
 import { z } from 'zod';
 
-import { StyledButton, StyledInput } from '@components/(styled)';
-
-// TODO: require login to submit
+import { StyledButton, StyledInput } from '@components/styled';
 
 const formSchema = z.object({
   title: z.string(),
   description: z.string(),
   javascript: z.object({
-    starter: z.string(),
-    solution: z.string(),
+    starter: z.string().url(),
+    solution: z.string().url(),
   }),
   typescript: z.object({
-    starter: z.string(),
-    solution: z.string(),
+    starter: z.string().url(),
+    solution: z.string().url(),
   }),
   difficulty: z.union([
     z.literal('easy'),
@@ -24,10 +22,10 @@ const formSchema = z.object({
   ]),
 });
 
-type FormFields = z.infer<typeof formSchema>;
+export type FormSchema = z.infer<typeof formSchema>;
 
 export default function ContributeForm() {
-  const [formFields, setFormFields] = useState<FormFields>({
+  const [formFields, setFormFields] = useState<FormSchema>({
     title: '',
     description: '',
     javascript: { starter: '', solution: '' },
@@ -38,7 +36,7 @@ export default function ContributeForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!formSchema.safeParse(formFields).success) return;
-    // TODO
+    // const formData = new FormData();
   };
 
   return (

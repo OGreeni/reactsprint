@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyledAnchor } from './(styled)';
+import { StyledAnchor } from './styled';
 
 export default function Footer() {
   return (

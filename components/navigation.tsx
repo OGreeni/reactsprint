@@ -1,15 +1,15 @@
 'use client';
 import React, { useState } from 'react';
 
-import StyledLink from '@app/(components)/(styled)/styled-link';
 import { UserButton } from '@clerk/nextjs/app-beta';
 import { SignedOut } from '@clerk/nextjs/app-beta/client';
 import LottieWrapper from '@components/lottie-wrapper';
+import StyledLink from '@components/styled/styled-link';
 import animationData from '@json/92672-animated-shapes.json';
 
-import LoginButton from './(auth)/login-button';
-import { StyledAnchor } from './(styled)';
+import LoginButton from './auth/login-button';
 import Hamburger from './hamburger';
+import { StyledAnchor } from './styled';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);

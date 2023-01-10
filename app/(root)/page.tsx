@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 
-import StyledButton from '@app/(components)/(styled)/styled-button';
 import LottieWrapper from '@components/lottie-wrapper';
+import StyledButton from '@components/styled/styled-button';
 import animationData from '@json/92672-animated-shapes.json';
 
 export default function Home() {

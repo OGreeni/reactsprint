@@ -1,7 +1,7 @@
 'use client';
 import { useEffect } from 'react';
 
-import { StyledButton } from './(components)/(styled)';
+import { StyledButton } from '@components/styled';
 
 export default function Error({
   error,
