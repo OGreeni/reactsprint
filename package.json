@@ -36,8 +36,6 @@
     "zod": "^3.20.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.4.0",
-    "@commitlint/config-conventional": "^17.4.0",
     "@types/formidable": "^2.0.5",
     "@types/react-lottie": "^1.2.6",
     "autoprefixer": "^10.4.13",
