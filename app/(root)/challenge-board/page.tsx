@@ -1,8 +1,8 @@
-'use client';
-import React, { useState } from 'react';
+import React from 'react';
 
 import ChallengeCard from '@components/challenge-card';
 
+import MappedChallenges from './mapped-challenges';
 import Sidebar from './sidebar';
 
 export default function Page() {
@@ -14,34 +14,8 @@ export default function Page() {
       <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_8fr]">
         <Sidebar />
         <div className="grid grid-rows-4 gap-5 rounded-md bg-white/10 p-5 lg:grid-cols-fill-96">
-          <ChallengeCard
-            title="test challenge"
-            description="lorem lorem lorem lorem orem iermie mroim foiamfiomwoi maio moimiom"
-            difficulty="easy"
-            slug="test"
-            challengeNumber={1}
-          />
-          <ChallengeCard
-            title="test challenge"
-            description="lorem lorem lorem lorem orem iermie mroim foiamfiomwoi maio moimiom"
-            difficulty="easy"
-            slug="test"
-            challengeNumber={1}
-          />
-          <ChallengeCard
-            challengeNumber={1}
-            title="test challenge"
-            description="lorem lorem lorem lorem orem iermie mroim foiamfiomwoi maio moimiom"
-            difficulty="easy"
-            slug="test"
-          />
-          <ChallengeCard
-            challengeNumber={1}
-            title="test challenge"
-            description="lorem lorem lorem lorem orem iermie mroim foiamfiomwoi maio moimiom"
-            difficulty="easy"
-            slug="test"
-          />
+          {/* @ts-ignore */}
+          <MappedChallenges />
         </div>
       </div>
     </section>
