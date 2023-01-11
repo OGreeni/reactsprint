@@ -1,12 +1,16 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { getAuth } from '@clerk/nextjs/server';
 import db from '@utils/db';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== 'GET') res.status(404);
+  const { userId } = getAuth(req);
+  if (!userId) {
+    res.status(401).json({ status: 'unauthorized' });
+  }
 
   try {
     const entries = await db.collection('challenges').orderBy('created').get();

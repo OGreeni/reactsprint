@@ -9,6 +9,9 @@ interface Props {
   challengeId: string;
 }
 
+// fetch user like status...
+// require login to like...
+
 export default function LikeCounter({ challengeId }: Props) {
   const getLikes = async () => {
     const response = await axios.get(`/api/challenges/${challengeId}/getLikes`);
