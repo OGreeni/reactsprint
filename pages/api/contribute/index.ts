@@ -1,6 +1,5 @@
 // TODO: fix
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { profile } from 'console';
 import formidable from 'formidable';
 import { z, ZodError } from 'zod';
 
@@ -11,8 +10,8 @@ type Data = {
 };
 
 const formSchema = z.object({
-  title: z.string(),
-  description: z.string(),
+  title: z.string().max(75),
+  description: z.string().max(350),
   javascript: z.object({
     starter: z.string().url(),
     solution: z.string().url(),

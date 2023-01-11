@@ -14,7 +14,7 @@ export default function Page() {
           <h1 className="text-center text-5xl">
             Contribute to <span className="font-bold">ReactSprint</span>
           </h1>
-          <p className="text-center">
+          <p className="text-center text-lg">
             We appreciate your interest in contributing! Please enter your
             challenge details below:
           </p>

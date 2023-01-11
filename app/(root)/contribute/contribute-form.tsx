@@ -5,8 +5,8 @@ import { z } from 'zod';
 import { StyledButton, StyledInput } from '@components/styled';
 
 const formSchema = z.object({
-  title: z.string(),
-  description: z.string(),
+  title: z.string().max(75),
+  description: z.string().max(350),
   javascript: z.object({
     starter: z.string().url(),
     solution: z.string().url(),
@@ -32,6 +32,8 @@ export default function ContributeForm() {
     typescript: { starter: '', solution: '' },
     difficulty: 'easy',
   });
+  const [titleCharCount, setTitleCharCount] = useState(0);
+  const [descriptionCharCount, setDescriptionCharCount] = useState(0);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -51,14 +53,17 @@ export default function ContributeForm() {
             type="text"
             id="title"
             name="title"
-            onChange={(e) =>
+            onChange={(e) => {
+              if (e.target.value.length > 75) return;
               setFormFields((prevState) => ({
                 ...prevState,
                 title: e.target.value,
-              }))
-            }
+              }));
+              setTitleCharCount(e.target.value.length);
+            }}
             value={formFields.title}
           />
+          <div className="mt-2">{titleCharCount} / 75</div>
         </div>
 
         <div>
@@ -67,14 +72,17 @@ export default function ContributeForm() {
             type="text"
             id="description"
             name="description"
-            onChange={(e) =>
+            onChange={(e) => {
+              if (e.target.value.length > 350) return;
               setFormFields((prevState) => ({
                 ...prevState,
                 description: e.target.value,
-              }))
-            }
+              }));
+              setDescriptionCharCount(e.target.value.length);
+            }}
             value={formFields.description}
           />
+          <div className="mt-2">{descriptionCharCount} / 350</div>
         </div>
         <div>
           <label htmlFor="js-sandbox-starter">

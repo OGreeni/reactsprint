@@ -13,9 +13,6 @@ interface Props {
   challengeId: string;
 }
 
-// fetch user like status...
-// require login to like...
-
 export default function LikeCounter({ challengeId }: Props) {
   const getLikes = async () => {
     const response = await axios.get(`/api/challenges/${challengeId}/getLikes`);
@@ -40,8 +37,6 @@ export default function LikeCounter({ challengeId }: Props) {
     onMutate: async (data) => {
       await queryClient.cancelQueries({ queryKey: ['likes', challengeId] });
       const previousLikes = queryClient.getQueryData(['likes', challengeId]);
-
-      // FIX: PROBLEM WHEN INITIAL STATE IS CLICKED. DATA APPEARS TO GLITCH
 
       // optimistically update to the new value
       queryClient.setQueryData(['likes', challengeId], (old) => {

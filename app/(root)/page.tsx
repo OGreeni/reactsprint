@@ -16,7 +16,7 @@ export default function Home() {
           ReactSprint
         </h1>
         <p className="text-center text-xl font-bold text-purple-900 lg:text-2xl">
-          Level up your React.js skills with free challenges.
+          Level up your React.js skills with free, engaging challenges.
         </p>
         <Link href="/challenge-board">
           <StyledButton className="mx-auto mt-10 text-xl">
