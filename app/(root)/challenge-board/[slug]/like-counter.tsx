@@ -32,7 +32,28 @@ export default function LikeCounter({ challengeId }: Props) {
 
   const mutation = useMutation({
     mutationFn: postLike,
-    onSuccess: (data) => {
+    onMutate: async (data) => {
+      await queryClient.cancelQueries({ queryKey: ['likes', challengeId] });
+      const previousLikes = queryClient.getQueryData(['likes', challengeId]);
+
+      // optimistically update to the new value
+      queryClient.setQueryData(['likes', challengeId], (old) => {
+        if (data.increment) {
+          // @ts-ignore
+          return { likes: old.likes + 1 };
+        }
+        // @ts-ignore
+        return { likes: old.likes - 1 };
+      });
+
+      return { previousLikes };
+    },
+
+    onError: (err, newLikes, context) => {
+      queryClient.setQueryData(['likes', challengeId], context?.previousLikes);
+    },
+
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['likes', challengeId] });
     },
   });
