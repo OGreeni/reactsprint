@@ -1,12 +1,26 @@
 'use client';
 import React, { useState } from 'react';
+import axios from 'axios';
 import { z } from 'zod';
 
 import { StyledButton, StyledInput } from '@components/styled';
 
+const DifficultyTooltip = () => {
+  return (
+    <>
+      <span className="group relative grid h-6 w-6 place-content-center rounded-full bg-white/50 font-bold shadow-xl">
+        <span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-white/50 px-2 py-1 text-purple-900 opacity-0 transition before:absolute before:left-1/2 before:top-full before:-translate-x-1/2 before:border-4 before:border-transparent before:border-t-white/50 before:content-[''] group-hover:opacity-100">
+          We will adjust it if needed.
+        </span>
+        i
+      </span>
+    </>
+  );
+};
+
 const formSchema = z.object({
-  title: z.string().max(75),
-  description: z.string().max(350),
+  title: z.string().min(2).max(75),
+  description: z.string().min(2).max(350),
   javascript: z.object({
     starter: z.string().url(),
     solution: z.string().url(),
@@ -34,17 +48,57 @@ export default function ContributeForm() {
   });
   const [titleCharCount, setTitleCharCount] = useState(0);
   const [descriptionCharCount, setDescriptionCharCount] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [formStatus, setFormStatus] = useState<'success' | 'error' | null>(
+    null
+  );
+  const [formParseError, setFormParseError] = useState<Record<string, any>>({});
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!formSchema.safeParse(formFields).success) return;
-    // const formData = new FormData();
+
+    const validationResult = formSchema.safeParse(formFields);
+    if (!validationResult.success) {
+      console.log(validationResult.error.flatten().fieldErrors);
+      console.log({ ...validationResult.error.flatten().fieldErrors });
+      setFormParseError({ ...validationResult.error.flatten().fieldErrors });
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('title', formFields.title);
+    formData.append('description', formFields.description);
+    formData.append('javascript-starter', formFields.javascript.starter);
+    formData.append('javascript-solution', formFields.javascript.solution);
+    formData.append('typescript-starter', formFields.typescript.starter);
+    formData.append('typescript-solution', formFields.typescript.solution);
+    formData.append('difficulty', formFields.difficulty);
+
+    try {
+      setLoading(true);
+      await axios.post('/api/challenges', formData);
+
+      setFormFields({
+        title: '',
+        description: '',
+        javascript: { starter: '', solution: '' },
+        typescript: { starter: '', solution: '' },
+        difficulty: 'easy',
+      });
+      setTitleCharCount(0);
+      setDescriptionCharCount(0);
+      setFormStatus('success');
+    } catch (error) {
+      console.error(error);
+      setFormStatus('error');
+    }
+    setLoading(false);
   };
 
   return (
     <form
       className="mx-auto flex flex-col items-center gap-2 rounded-md bg-white/10 p-10"
-      onClick={(e) => handleSubmit(e)}
+      onSubmit={(e) => handleSubmit(e)}
     >
       <div className="flex flex-col items-start justify-center gap-4">
         <div>
@@ -53,6 +107,7 @@ export default function ContributeForm() {
             type="text"
             id="title"
             name="title"
+            className={formParseError.title ? 'border-red-500' : ''}
             onChange={(e) => {
               if (e.target.value.length > 75) return;
               setFormFields((prevState) => ({
@@ -72,6 +127,7 @@ export default function ContributeForm() {
             type="text"
             id="description"
             name="description"
+            className={formParseError.description ? 'border-red-500' : ''}
             onChange={(e) => {
               if (e.target.value.length > 350) return;
               setFormFields((prevState) => ({
@@ -92,6 +148,7 @@ export default function ContributeForm() {
             type="text"
             id="js-sandbox-starter"
             name="js-sandbox-starter"
+            className={formParseError.javascript[0] ? 'border-red-500' : ''}
             onChange={(e) =>
               setFormFields((prevState) => ({
                 ...prevState,
@@ -112,6 +169,7 @@ export default function ContributeForm() {
             type="text"
             id="js-sandbox-solution"
             name="js-sandbox-solution"
+            className={formParseError.javascript[1] ? 'border-red-500' : ''}
             onChange={(e) =>
               setFormFields((prevState) => ({
                 ...prevState,
@@ -128,10 +186,12 @@ export default function ContributeForm() {
           <label htmlFor="ts-sandbox-starter">
             TypeScript codesandbox starter template link
           </label>
+          {/* TODO: fix TS solution input value */}
           <StyledInput
             type="text"
             id="ts-sandbox-starter"
             name="ts-sandbox-starter"
+            className={formParseError.typescript[0] ? 'border-red-500' : ''}
             onChange={(e) =>
               setFormFields((prevState) => ({
                 ...prevState,
@@ -150,21 +210,22 @@ export default function ContributeForm() {
           </label>
           <StyledInput
             type="text"
-            id="ts-sandbox-solution"
-            name="ts-sandbox-solution"
+            id="ts-sandbox-starter"
+            name="ts-sandbox-starter"
+            className={formParseError.typescript[1] ? 'border-red-500' : ''}
             onChange={(e) =>
               setFormFields((prevState) => ({
                 ...prevState,
                 typescript: {
-                  starter: prevState.typescript.starter,
                   solution: e.target.value,
+                  starter: prevState.typescript.starter,
                 },
               }))
             }
             value={formFields.typescript.solution}
           />
         </div>
-        <div>
+        <div className="flex gap-2">
           <label htmlFor="difficulty">Difficulty:</label>{' '}
           <select
             className="rounded-md bg-white/20"
@@ -182,8 +243,21 @@ export default function ContributeForm() {
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
           </select>
+          <DifficultyTooltip />
         </div>
-        <StyledButton className="w-full">Submit Challenge</StyledButton>
+        <StyledButton className={`w-full ${loading && 'animate-pulse'}`}>
+          Submit Challenge
+        </StyledButton>
+        {formStatus === 'success' && (
+          <div className="w-full text-center font-bold text-green-700">
+            Challenge submitted!
+          </div>
+        )}
+        {formStatus === 'error' && (
+          <div className="w-full text-center font-bold text-red-700">
+            Error submitting challenge. Please try again.
+          </div>
+        )}
       </div>
     </form>
   );

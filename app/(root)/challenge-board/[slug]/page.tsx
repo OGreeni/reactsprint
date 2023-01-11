@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Sandpack } from '@codesandbox/sandpack-react';
 import DifficultyTag from '@components/difficulty-tag';
 import SandpackWrapper from '@components/sandpack-wrapper';
 import { StyledAnchor } from '@components/styled';
@@ -65,10 +64,6 @@ export default async function Page({ params }: Props) {
         </div>
       </aside>
       <div className="grow rounded-md bg-white/10 p-4">
-        {/* <iframe
-          src="https://codesandbox.io/embed/challenge-1-js-xnnqp5?fontsize=14&hidenavigation=1&theme=dark"
-          className="h-full w-full rounded-md border-4 border-white/40 shadow-xl"
-        /> */}
         <SandpackWrapper />
       </div>
     </section>

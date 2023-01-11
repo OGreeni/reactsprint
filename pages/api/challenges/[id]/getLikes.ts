@@ -17,10 +17,7 @@ export default async function handler(
       .get();
 
     if (userId) {
-      const getUser = db
-        .collection('users')
-        .doc(userId as string)
-        .get();
+      const getUser = db.collection('users').doc(userId).get();
 
       const [challenge, user] = await Promise.all([getChallenge, getUser]);
       if (!user.exists) {
@@ -34,7 +31,7 @@ export default async function handler(
           userData: { isLiked: false },
         });
       }
-      // TODO: update user like status
+
       return res.status(200).json({
         likes: challenge.data()!.likes,
         userData: {
