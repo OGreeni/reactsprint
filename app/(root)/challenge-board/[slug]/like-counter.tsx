@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 import { StyledButton } from '@components/styled';
@@ -25,8 +25,6 @@ export default function LikeCounter({ challengeId }: Props) {
     return response.data;
   };
 
-  const [clicked, setClicked] = useState(false);
-
   const queryClient = useQueryClient();
   const query = useQuery({
     queryKey: ['likes', challengeId],
@@ -39,14 +37,16 @@ export default function LikeCounter({ challengeId }: Props) {
       await queryClient.cancelQueries({ queryKey: ['likes', challengeId] });
       const previousLikes = queryClient.getQueryData(['likes', challengeId]);
 
+      // FIX: PROBLEM WHEN INITIAL STATE IS CLICKED. DATA APPEARS TO GLITCH
+
       // optimistically update to the new value
       queryClient.setQueryData(['likes', challengeId], (old) => {
         if (data.increment) {
           // @ts-ignore
-          return { likes: old.likes + 1 };
+          return { likes: old.likes + 1, userData: { isLiked: true } };
         }
         // @ts-ignore
-        return { likes: old.likes - 1 };
+        return { likes: old.likes - 1, userData: { isLiked: false } };
       });
 
       return { previousLikes };
@@ -65,17 +65,16 @@ export default function LikeCounter({ challengeId }: Props) {
     <>
       <StyledButton
         onClick={() => {
-          if (clicked) {
+          if (query?.data.userData.isLiked) {
             mutation.mutate({ increment: false });
           } else {
             mutation.mutate({ increment: true });
           }
-          setClicked(!clicked);
         }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          fill={clicked ? 'white' : 'none'}
+          fill={query?.data?.userData?.isLiked ? 'white' : 'none'}
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
