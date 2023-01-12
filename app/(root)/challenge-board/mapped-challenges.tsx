@@ -31,11 +31,13 @@ export interface ChallengeDocument {
 interface Props {
   categoryFilter: Category | null;
   difficultyFilter: 'easy' | 'medium' | 'hard' | null;
+  searchQuery: string;
 }
 
 export default function MappedChallenges({
   categoryFilter,
   difficultyFilter,
+  searchQuery,
 }: Props) {
   const getChallenges = async () => {
     const { data } = await axios.get('/api/challenges');
@@ -47,9 +49,16 @@ export default function MappedChallenges({
     queryFn: getChallenges,
   });
 
+  const filteredData = query.data?.challenges.filter((challenge) => {
+    if (searchQuery) {
+      return challenge.title.toLowerCase().includes(searchQuery.toLowerCase());
+    }
+    return true;
+  });
+
   if (categoryFilter && difficultyFilter) {
-    return query.data?.challenges
-      .filter(
+    return filteredData
+      ?.filter(
         (challenge) =>
           challenge.tags === categoryFilter &&
           challenge.difficulty === difficultyFilter
@@ -60,23 +69,23 @@ export default function MappedChallenges({
         </Link>
       ));
   } else if (categoryFilter && !difficultyFilter) {
-    return query.data?.challenges
-      .filter((challenge) => challenge.tags === categoryFilter)
+    return filteredData
+      ?.filter((challenge) => challenge.tags === categoryFilter)
       .map((challenge) => (
         <Link href={`/challenge-board/${challenge.slug}`} key={challenge.id}>
           <ChallengeCard {...challenge} />
         </Link>
       ));
   } else if (!categoryFilter && difficultyFilter) {
-    return query.data?.challenges
-      .filter((challenge) => challenge.difficulty === difficultyFilter)
+    return filteredData
+      ?.filter((challenge) => challenge.difficulty === difficultyFilter)
       .map((challenge) => (
         <Link href={`/challenge-board/${challenge.slug}`} key={challenge.id}>
           <ChallengeCard {...challenge} />
         </Link>
       ));
   } else {
-    return query.data?.challenges.map((challenge) => (
+    return filteredData?.map((challenge) => (
       <Link href={`/challenge-board/${challenge.slug}`} key={challenge.id}>
         <ChallengeCard {...challenge} />
       </Link>

@@ -44,7 +44,7 @@ export default function Sidebar({
   return (
     <aside className="mx-auto flex w-full flex-col items-center justify-center gap-4 rounded-md bg-white/10 py-2 px-4 backdrop-blur lg:block lg:flex-row lg:gap-0">
       <div>
-        <p className="flex items-center gap-1 text-center  text-xl font-bold text-purple-900">
+        <p className="flex items-center justify-center gap-1 text-center  text-xl font-bold text-purple-900">
           <svg
             fill="currentColor"
             width="800px"
@@ -79,7 +79,7 @@ export default function Sidebar({
         </ul>
       </div>
       <div>
-        <p className="flex items-center gap-1 text-center text-xl font-bold text-purple-900">
+        <p className="flex items-center justify-center gap-1 text-center text-xl font-bold text-purple-900">
           <svg
             fill="currentColor"
             width="800px"
