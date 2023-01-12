@@ -2,7 +2,6 @@ import React from 'react';
 
 import DifficultyTag from '@components/difficulty-tag';
 import SandpackWrapper from '@components/sandpack-wrapper';
-import { StyledAnchor } from '@components/styled';
 import db from '@utils/db';
 import { formatCode } from '@utils/index';
 
@@ -50,15 +49,8 @@ export default async function Page({ params }: Props) {
             <span className="font-bold">Description:</span>{' '}
             {entryData.description}
           </p>
-          {/* <StyledAnchor
-            href="/"
-            className="w-max text-xl font-bold"
-            target="_blank"
-          >
-            View Solution
-          </StyledAnchor> */}
         </div>
-        <div className="flex items-center justify-center gap-5">
+        <div className="mt-5 flex items-center justify-center gap-5">
           <LikeCounter challengeId={entryData.id} />
         </div>
       </aside>
