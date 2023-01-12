@@ -60,24 +60,14 @@ export default function ContributeForm() {
 
     const validationResult = formSchema.safeParse(formFields);
     if (!validationResult.success) {
-      console.log(validationResult.error.flatten().fieldErrors);
-      console.log({ ...validationResult.error.flatten().fieldErrors });
       setFormParseError({ ...validationResult.error.flatten().fieldErrors });
       return;
     }
 
-    const formData = new FormData();
-    formData.append('title', formFields.title);
-    formData.append('description', formFields.description);
-    formData.append('javascript-starter', formFields.javascript.starter);
-    formData.append('javascript-solution', formFields.javascript.solution);
-    formData.append('typescript-starter', formFields.typescript.starter);
-    formData.append('typescript-solution', formFields.typescript.solution);
-    formData.append('difficulty', formFields.difficulty);
-
     try {
       setLoading(true);
-      await axios.post('/api/challenges', formData);
+
+      await axios.post('/api/contribute', formFields);
 
       setFormFields({
         title: '',
@@ -90,7 +80,6 @@ export default function ContributeForm() {
       setDescriptionCharCount(0);
       setFormStatus('success');
     } catch (error) {
-      console.error(error);
       setFormStatus('error');
     }
     setLoading(false);
