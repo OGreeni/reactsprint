@@ -9,7 +9,7 @@ interface Props {
 
 export default function Searchbar({ searchQuery, setSearchQuery }: Props) {
   return (
-    <div className="relative mx-auto mt-3 w-max  text-purple-900">
+    <div className="relative mx-auto mt-3 w-max text-purple-900 lg:ml-0">
       <label htmlFor="search" className="sr-only">
         Search
       </label>
