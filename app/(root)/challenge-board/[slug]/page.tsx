@@ -4,6 +4,7 @@ import DifficultyTag from '@components/difficulty-tag';
 import SandpackWrapper from '@components/sandpack-wrapper';
 import { StyledAnchor } from '@components/styled';
 import db from '@utils/db';
+import { formatCode } from '@utils/index';
 
 import type { ChallengeDocument } from '../mapped-challenges';
 
@@ -21,8 +22,6 @@ export default async function Page({ params }: Props) {
     ...(entry.data() as ChallengeDocument),
     id: entry.id,
   }))[0];
-
-  // TODO: tags redirect to /challenge-board/[tag]
 
   return (
     <section className="flex flex-col gap-4 shadow-md lg:flex-row">
@@ -51,20 +50,29 @@ export default async function Page({ params }: Props) {
             <span className="font-bold">Description:</span>{' '}
             {entryData.description}
           </p>
-          <StyledAnchor
+          {/* <StyledAnchor
             href="/"
             className="w-max text-xl font-bold"
             target="_blank"
           >
             View Solution
-          </StyledAnchor>
+          </StyledAnchor> */}
         </div>
         <div className="flex items-center justify-center gap-5">
           <LikeCounter challengeId={entryData.id} />
         </div>
       </aside>
       <div className="grow rounded-md bg-white/10 p-4">
-        <SandpackWrapper />
+        <SandpackWrapper
+          javascript={{
+            starter: formatCode(entryData.javascript.starter),
+            solution: formatCode(entryData.javascript.solution),
+          }}
+          typescript={{
+            starter: formatCode(entryData.typescript.starter),
+            solution: formatCode(entryData.typescript.solution),
+          }}
+        />
       </div>
     </section>
   );
