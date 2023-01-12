@@ -25,7 +25,7 @@ export interface ChallengeDocument {
   difficulty: 'easy' | 'medium' | 'hard';
   slug: string;
   likes: number;
-  tags: Category;
+  tags: Category[];
 }
 
 interface Props {
@@ -60,7 +60,7 @@ export default function MappedChallenges({
     return filteredData
       ?.filter(
         (challenge) =>
-          challenge.tags === categoryFilter &&
+          challenge.tags.includes(categoryFilter) &&
           challenge.difficulty === difficultyFilter
       )
       .map((challenge) => (
@@ -70,7 +70,7 @@ export default function MappedChallenges({
       ));
   } else if (categoryFilter && !difficultyFilter) {
     return filteredData
-      ?.filter((challenge) => challenge.tags === categoryFilter)
+      ?.filter((challenge) => challenge.tags.includes(categoryFilter))
       .map((challenge) => (
         <Link href={`/challenge-board/${challenge.slug}`} key={challenge.id}>
           <ChallengeCard {...challenge} />

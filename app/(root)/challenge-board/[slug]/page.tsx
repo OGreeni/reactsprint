@@ -22,6 +22,8 @@ export default async function Page({ params }: Props) {
     id: entry.id,
   }))[0];
 
+  console.log(entryData.tags);
+
   return (
     <section className="flex flex-col gap-4 shadow-md lg:flex-row">
       <aside className="flex basis-72 flex-col justify-between rounded-md bg-white/10 p-2 text-purple-900">
@@ -43,7 +45,8 @@ export default async function Page({ params }: Props) {
           </p>
           {/* @ts-ignore */}
           <p className="text-lg">
-            <span className="text-xl font-bold">Tags: </span>#{entryData.tags}
+            <span className="text-xl font-bold">Tags: </span>#
+            {entryData.tags.join(' #')}
           </p>
           <p className="text-xl">
             <span className="font-bold">Description:</span>{' '}
