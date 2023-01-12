@@ -5,6 +5,7 @@ import { z } from 'zod';
 
 import { StyledButton, StyledInput } from '@components/styled';
 
+// TODO: fix API route
 const DifficultyTooltip = () => {
   return (
     <>
@@ -148,7 +149,11 @@ export default function ContributeForm() {
             type="text"
             id="js-sandbox-starter"
             name="js-sandbox-starter"
-            className={formParseError.javascript[0] ? 'border-red-500' : ''}
+            className={
+              formParseError.javascript && formParseError.javascript[0]
+                ? 'border-red-500'
+                : ''
+            }
             onChange={(e) =>
               setFormFields((prevState) => ({
                 ...prevState,
@@ -169,7 +174,11 @@ export default function ContributeForm() {
             type="text"
             id="js-sandbox-solution"
             name="js-sandbox-solution"
-            className={formParseError.javascript[1] ? 'border-red-500' : ''}
+            className={
+              formParseError.javascript && formParseError.javascript[1]
+                ? 'border-red-500'
+                : ''
+            }
             onChange={(e) =>
               setFormFields((prevState) => ({
                 ...prevState,
@@ -191,7 +200,11 @@ export default function ContributeForm() {
             type="text"
             id="ts-sandbox-starter"
             name="ts-sandbox-starter"
-            className={formParseError.typescript[0] ? 'border-red-500' : ''}
+            className={
+              formParseError.typescript && formParseError.typescript[0]
+                ? 'border-red-500'
+                : ''
+            }
             onChange={(e) =>
               setFormFields((prevState) => ({
                 ...prevState,
@@ -212,7 +225,11 @@ export default function ContributeForm() {
             type="text"
             id="ts-sandbox-starter"
             name="ts-sandbox-starter"
-            className={formParseError.typescript[1] ? 'border-red-500' : ''}
+            className={
+              formParseError.typescript && formParseError.typescript[1]
+                ? 'border-red-500'
+                : ''
+            }
             onChange={(e) =>
               setFormFields((prevState) => ({
                 ...prevState,

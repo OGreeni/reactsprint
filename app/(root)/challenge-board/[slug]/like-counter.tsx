@@ -3,9 +3,7 @@ import React from 'react';
 import axios from 'axios';
 
 import { SignedIn, SignedOut } from '@clerk/nextjs/app-beta/client';
-import Login from '@components/auth/login-button';
 import LoginButton from '@components/auth/login-button';
-import RedirectToSignInWrapper from '@components/auth/redirect-to-sign-in-wrapper';
 import { StyledButton } from '@components/styled';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -78,7 +76,7 @@ export default function LikeCounter({ challengeId }: Props) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="h-10 w-10"
+            className="mx-auto h-5 w-5 lg:h-8 lg:w-8"
           >
             <path
               strokeLinecap="round"
@@ -87,7 +85,7 @@ export default function LikeCounter({ challengeId }: Props) {
             />
           </svg>
         </StyledButton>
-        <span className="text-3xl font-bold">{query.data?.likes}</span>
+        <span className="text-2xl font-bold">{query.data?.likes}</span>
       </SignedIn>
       <SignedOut>
         <StyledButton>
@@ -97,7 +95,7 @@ export default function LikeCounter({ challengeId }: Props) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="h-10 w-10"
+            className="mx-auto h-5 w-5 lg:h-8 lg:w-8"
           >
             <path
               strokeLinecap="round"
@@ -107,7 +105,7 @@ export default function LikeCounter({ challengeId }: Props) {
           </svg>
           <LoginButton />
         </StyledButton>
-        <span className="text-3xl font-bold">{query.data?.likes}</span>
+        <span className="text-2xl font-bold">{query.data?.likes}</span>
       </SignedOut>
     </>
   );

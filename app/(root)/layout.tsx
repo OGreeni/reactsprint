@@ -24,7 +24,7 @@ export default function RootLayout({
           <header className="mb-32">
             <Navigation />
           </header>
-          <main className="grid grow">
+          <main className="grow">
             <ReactQueryWrapper>{children}</ReactQueryWrapper>
           </main>
           <Footer />

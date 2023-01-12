@@ -1,10 +1,15 @@
+'use client';
 import React from 'react';
 import Link from 'next/link';
+import axios from 'axios';
 
 import ChallengeCard from '@components/challenge-card';
-import db from '@utils/db';
+import { useQuery } from '@tanstack/react-query';
+
+import type { Category } from './sidebar';
 
 export interface ChallengeDocument {
+  id: string;
   created: string;
   index: number;
   title: string;
@@ -20,24 +25,61 @@ export interface ChallengeDocument {
   difficulty: 'easy' | 'medium' | 'hard';
   slug: string;
   likes: number;
+  tags: Category;
 }
 
-export default async function MappedChallenges() {
-  const entries = await db.collection('challenges').orderBy('created').get();
-  const entriesData = entries.docs.map((entry) => ({
-    id: entry.id,
-    ...(entry.data() as ChallengeDocument),
-  }));
+interface Props {
+  categoryFilter: Category | null;
+  difficultyFilter: 'easy' | 'medium' | 'hard' | null;
+}
 
-  return entriesData.map((entry) => (
-    <Link href={`/challenge-board/${entry.slug}`} key={entry.id}>
-      <ChallengeCard
-        index={entry.index + 1}
-        key={entry.id}
-        difficulty={entry.difficulty}
-        title={entry.title}
-        description={entry.description}
-      />
-    </Link>
-  ));
+export default function MappedChallenges({
+  categoryFilter,
+  difficultyFilter,
+}: Props) {
+  const getChallenges = async () => {
+    const { data } = await axios.get('/api/challenges');
+    return data;
+  };
+
+  const query = useQuery<{ challenges: ChallengeDocument[] }>({
+    queryKey: ['challenges'],
+    queryFn: getChallenges,
+  });
+
+  if (categoryFilter && difficultyFilter) {
+    return query.data?.challenges
+      .filter(
+        (challenge) =>
+          challenge.tags === categoryFilter &&
+          challenge.difficulty === difficultyFilter
+      )
+      .map((challenge) => (
+        <Link href={`/challenge-board/${challenge.slug}`} key={challenge.id}>
+          <ChallengeCard {...challenge} />
+        </Link>
+      ));
+  } else if (categoryFilter && !difficultyFilter) {
+    return query.data?.challenges
+      .filter((challenge) => challenge.tags === categoryFilter)
+      .map((challenge) => (
+        <Link href={`/challenge-board/${challenge.slug}`} key={challenge.id}>
+          <ChallengeCard {...challenge} />
+        </Link>
+      ));
+  } else if (!categoryFilter && difficultyFilter) {
+    return query.data?.challenges
+      .filter((challenge) => challenge.difficulty === difficultyFilter)
+      .map((challenge) => (
+        <Link href={`/challenge-board/${challenge.slug}`} key={challenge.id}>
+          <ChallengeCard {...challenge} />
+        </Link>
+      ));
+  } else {
+    return query.data?.challenges.map((challenge) => (
+      <Link href={`/challenge-board/${challenge.slug}`} key={challenge.id}>
+        <ChallengeCard {...challenge} />
+      </Link>
+    ));
+  }
 }

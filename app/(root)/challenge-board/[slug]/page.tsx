@@ -22,8 +22,10 @@ export default async function Page({ params }: Props) {
     id: entry.id,
   }))[0];
 
+  // TODO: tags redirect to /challenge-board/[tag]
+
   return (
-    <section className="flex gap-4 shadow-md">
+    <section className="flex flex-col gap-4 shadow-md lg:flex-row">
       <aside className="flex basis-72 flex-col justify-between rounded-md bg-white/10 p-2 text-purple-900">
         <div className="flex flex-col gap-5">
           <h2 className="pt-5 text-center text-3xl font-bold">
@@ -41,11 +43,9 @@ export default async function Page({ params }: Props) {
             <span className="font-bold">Difficulty: </span>
             <DifficultyTag difficulty={entryData.difficulty} />
           </p>
+          {/* @ts-ignore */}
           <p className="text-lg">
-            <span className="text-xl font-bold">Tags: </span>
-            {/* TODO: tags link to challenge board with tag as selected filter */}
-            <button>#useState</button> <button>#Event-Handling</button>{' '}
-            <button>#Forms</button>
+            <span className="text-xl font-bold">Tags: </span>#{entryData.tags}
           </p>
           <p className="text-xl">
             <span className="font-bold">Description:</span>{' '}
@@ -53,7 +53,7 @@ export default async function Page({ params }: Props) {
           </p>
           <StyledAnchor
             href="/"
-            className="block text-center text-xl font-bold"
+            className="w-max text-xl font-bold"
             target="_blank"
           >
             View Solution
