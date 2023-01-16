@@ -7,13 +7,16 @@ import ChallengeCard from '@components/challenge-card';
 import { useQuery } from '@tanstack/react-query';
 
 import type { Category } from './sidebar';
+// update the backend to match this interface (hints, solution explanation, objective)
+// update objective to accept backticks and render them as code
+// update/improve challenges
 
 export interface ChallengeDocument {
   id: string;
   created: string;
   index: number;
   title: string;
-  description: string;
+  objective: string;
   javascript: {
     starter: string;
     solution: string;
@@ -22,9 +25,11 @@ export interface ChallengeDocument {
     starter: string;
     solution: string;
   };
+  explanation: string;
   difficulty: 'easy' | 'medium' | 'hard';
   slug: string;
   likes: number;
+  hints: string[];
   tags: Category[];
 }
 
@@ -51,7 +56,12 @@ export default function MappedChallenges({
 
   const filteredData = query.data?.challenges.filter((challenge) => {
     if (searchQuery) {
-      return challenge.title.toLowerCase().includes(searchQuery.toLowerCase());
+      return challenge.title.toLowerCase().includes(
+        searchQuery
+          .toLowerCase()
+          .trim()
+          .replace(/ +(?= )/g, '')
+      );
     }
     return true;
   });

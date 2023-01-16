@@ -7,7 +7,7 @@ import DifficultyTag from '@components/difficulty-tag';
 import { titleCase } from '../utils';
 interface Props {
   title: string;
-  description: string;
+  objective: string;
   difficulty: 'easy' | 'medium' | 'hard';
   index: number;
   tags: Category[];
@@ -15,7 +15,7 @@ interface Props {
 
 export default function ChallengeCard({
   title,
-  description,
+  objective,
   difficulty,
   index,
   tags,
@@ -27,7 +27,7 @@ export default function ChallengeCard({
       </h3>
       <p>
         <span className="font-bold">Description: </span>
-        {description.toLowerCase()}
+        {objective.toLowerCase()}
       </p>
       <p>
         <span className="font-bold">Tags: #{tags.join(' #')}</span>

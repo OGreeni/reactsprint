@@ -7,6 +7,7 @@ import { formatCode } from '@utils/index';
 
 import type { ChallengeDocument } from '../mapped-challenges';
 
+import HintsList from './hints-toggle';
 import LikeCounter from './like-counter';
 interface Props {
   params: { slug: string };
@@ -21,8 +22,6 @@ export default async function Page({ params }: Props) {
     ...(entry.data() as ChallengeDocument),
     id: entry.id,
   }))[0];
-
-  console.log(entryData.tags);
 
   return (
     <section className="flex flex-col gap-4 shadow-md lg:flex-row">
@@ -49,9 +48,9 @@ export default async function Page({ params }: Props) {
             {entryData.tags.join(' #')}
           </p>
           <p className="text-xl">
-            <span className="font-bold">Description:</span>{' '}
-            {entryData.description}
+            <span className="font-bold">Objective:</span> {entryData.objective}
           </p>
+          <HintsList hints={entryData.hints} />
         </div>
         <div className="mt-5 flex items-center justify-center gap-5">
           <LikeCounter challengeId={entryData.id} />
